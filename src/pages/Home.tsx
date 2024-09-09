@@ -21,8 +21,6 @@ export const Home = () => {
         </div>
     );
 };
-
-// Add the custom CSS directly in the same file
 const styles = document.createElement('style');
 styles.innerHTML = `
 @keyframes fade-in {

@@ -17,7 +17,7 @@ export const Newtask = () => {
                 }
             });
             console.log(response.data);
-            setTask(""); // Reset task input on success
+            setTask(""); 
         } catch (error) {
             console.error("Error creating task:", error);
         }
