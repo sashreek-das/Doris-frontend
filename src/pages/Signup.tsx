@@ -20,6 +20,8 @@ export const Signup = () => {
                 password
             });
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("UserId", response.data.userId);
+
             navigate("/dashboard");
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
