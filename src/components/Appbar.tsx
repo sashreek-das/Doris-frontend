@@ -24,6 +24,15 @@ export const Appbar = () => {
                         Logout
                     </button>
                 </Link>
+                {/* <Link to="/yourTasks">
+                    <button
+                        type="button"
+                        className="text-gray-700 hover:text-gray-500 focus:outline-none font-semibold rounded-full text-sm px-5 py-2 transition-all duration-300 ease-in-out transform hover:scale-105"
+                        onClick={() => localStorage.removeItem("token")}
+                    >
+                        Your Tasks
+                    </button>
+                </Link> */}
                 <DarkModeToggle/>
             </div>
         </div>

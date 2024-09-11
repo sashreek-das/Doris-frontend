@@ -8,7 +8,7 @@ interface Task {
     taken: number;
 }
 
-export const MyTasks = () => {
+export const YourTasks = () => {
     const [myTasks, setMyTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -42,13 +42,13 @@ export const MyTasks = () => {
                     Your Tasks
                 </h2>
                 {myTasks.length === 0 ? (
-                    <p className="text-gray-600 dark:text-gray-400 text-center">You have no tasks assigned.</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-center">no assineed tasks</p>
                 ) : (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {myTasks.map((task: Task) => (
                             <li key={task._id} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
                                 <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2">{task.task}</h3>
-                                <p className="text-sm text-green-500 font-semibold">Assigned to You</p>
+                                {/* <p className="text-sm text-green-500 font-semibold">Assigned to You</p> */}
                             </li>
                         ))}
                     </ul>

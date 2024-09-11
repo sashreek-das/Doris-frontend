@@ -1,6 +1,5 @@
-// src/components/TakeTaskButton.tsx
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface TakeTaskButtonProps {
     taskId: string;
@@ -11,8 +10,22 @@ interface TakeTaskButtonProps {
 export const TakeTaskButton: React.FC<TakeTaskButtonProps> = ({ taskId, taskTaken, onTaskTaken }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const [userId, setUserId] = useState<string>("");
+
+    // Get userId from local storage when the component mounts
+    useEffect(() => {
+        const storedUserId = localStorage.getItem("UserId");
+        if (storedUserId) {
+            setUserId(storedUserId);
+        }
+    }, []);
 
     const handleTakeTask = async () => {
+        if (!userId) {
+            setErrorMessage("User is not logged in.");
+            return;
+        }
+
         setLoading(true); // Set loading state for the clicked task
         setErrorMessage(""); // Reset error message
         try {
@@ -20,8 +33,11 @@ export const TakeTaskButton: React.FC<TakeTaskButtonProps> = ({ taskId, taskTake
                 `https://doris-backend.vercel.app/api/v1/ticket/takeTask/${taskId}`, 
                 {
                     headers: {
-                        "Authorization": `${localStorage.getItem("token")}`
-                    }
+                        "Authorization": `${localStorage.getItem("token")}`,
+                    },
+                    params: {
+                        userId: userId, // Pass the userId as a query parameter
+                    },
                 }
             );
 

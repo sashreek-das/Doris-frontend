@@ -1,4 +1,3 @@
-// src/components/ExistingTasks.tsx
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TakeTaskButton } from "./TakeTask";
@@ -19,8 +18,8 @@ export const ExistingTasks = () => {
             try {
                 const response = await axios.get("https://doris-backend.vercel.app/api/v1/ticket/remainingTasks", {
                     headers: {
-                        "Authorization": `${localStorage.getItem("token")}`
-                    }
+                        "Authorization": `${localStorage.getItem("token")}`,
+                    },
                 });
                 setTasks(response.data.tasks);
             } catch (error) {
@@ -35,8 +34,8 @@ export const ExistingTasks = () => {
 
     const handleTaskTaken = (taskId: string) => {
         // Update the task in the local state to reflect it has been taken
-        setTasks(prevTasks =>
-            prevTasks.map(task => 
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
                 task._id === taskId ? { ...task, taken: task.taken + 1 } : task
             )
         );
@@ -58,12 +57,21 @@ export const ExistingTasks = () => {
                 ) : (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {tasks.map((task: Task) => (
-                            <li key={task._id} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                                <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2">{task.task}</h3>
-                                <p className={`text-sm font-semibold ${task.taken >= 2 ? "text-red-500" : "text-green-500"}`}>
+                            <li
+                                key={task._id}
+                                className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
+                            >
+                                <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2">
+                                    {task.task}
+                                </h3>
+                                <p
+                                    className={`text-sm font-semibold ${
+                                        task.taken >= 2 ? "text-red-500" : "text-green-500"
+                                    }`}
+                                >
                                     {task.taken >= 2 ? "Taken" : "Available"}
                                 </p>
-                                
+
                                 {/* Use TakeTaskButton component */}
                                 <TakeTaskButton
                                     taskId={task._id}
