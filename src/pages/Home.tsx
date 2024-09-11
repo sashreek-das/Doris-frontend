@@ -5,15 +5,15 @@ export const Home = () => {
         <div className="flex justify-center items-center min-h-screen bg-white text-black">
             <div className="text-center space-y-4">
                 <div className="text-lg font-semibold animate-fade-in">
-                    Ticketing system re-designed
+                    Sorry we are under maintenance
                 </div>
                 <div>
-                    <Link to="/signup">
+                    <Link to="/">
                         <button
                             type="button"
                             className="text-black bg-white border border-black hover:bg-black hover:text-white transition-colors duration-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none animate-bounce"
                         >
-                            Start your journey
+                            ByeBye
                         </button>
                     </Link>
                 </div>

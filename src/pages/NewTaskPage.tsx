@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
-export const Newtask = () => {
+export const NewTaskPage = () => {
     const [task, setTask] = useState("");
 
     const token = localStorage.getItem("token");
@@ -41,13 +42,16 @@ export const Newtask = () => {
                         placeholder="Enter task description"
                     />
                 </div>
-
+                <Link to = '/dashboard'>
                 <button
                     onClick={handleCreateTask}
                     className="w-full py-2 px-4 rounded-md mt-4 text-white font-medium bg-black hover:bg-gray-800 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                 >
                     Create Task
                 </button>
+                </Link>
+
+                
             </div>
         </div>
     );

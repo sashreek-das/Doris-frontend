@@ -1,60 +1,60 @@
-// src/components/ExistingTasks.tsx
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TakeTaskButton } from "./TakeTask";
 
 interface Task {
     _id: string;
-    userId: string;
     task: string;
     taken: number;
 }
 
-export const ExistingTasks = () => {
+export const AssignedTasks = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     useEffect(() => {
-        const fetchTasks = async () => {
+        const fetchAssignedTasks = async () => {
             try {
-                const response = await axios.get("https://doris-backend.vercel.app/api/v1/ticket/remainingTasks", {
+                const response = await axios.get("https://doris-backend.vercel.app/api/v1/ticket/assignedTasks", {
                     headers: {
                         "Authorization": `${localStorage.getItem("token")}`
                     }
                 });
                 setTasks(response.data.tasks);
-            } catch (error) {
-                console.error("Error fetching tasks:", error);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error:any) {
+                if (error.response && error.response.data && error.response.data.message) {
+                    setErrorMessage(error.response.data.message);
+                } else {
+                    setErrorMessage("An error occurred while fetching assigned tasks.");
+                }
+                console.error("Error fetching assigned tasks:", error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchTasks();
+        fetchAssignedTasks();
     }, []);
 
-    const handleTaskTaken = (taskId: string) => {
-        // Update the task in the local state to reflect it has been taken
-        setTasks(prevTasks =>
-            prevTasks.map(task => 
-                task._id === taskId ? { ...task, taken: task.taken + 1 } : task
-            )
-        );
-    };
-
     if (loading) {
-        return <p className="text-center text-gray-700">Loading tasks...</p>;
+        return <p className="text-center text-gray-700">Loading assigned tasks...</p>;
     }
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center">
-                    Available Tasks
+                    Assigned Tasks
                 </h2>
 
+                {/* Error message display */}
+                {errorMessage && (
+                    <p className="text-center text-red-500 mb-4">{errorMessage}</p>
+                )}
+
                 {tasks.length === 0 ? (
-                    <p className="text-gray-600 dark:text-gray-400 text-center">No tasks available.</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-center">You have no assigned tasks.</p>
                 ) : (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {tasks.map((task: Task) => (
@@ -63,13 +63,6 @@ export const ExistingTasks = () => {
                                 <p className={`text-sm font-semibold ${task.taken >= 2 ? "text-red-500" : "text-green-500"}`}>
                                     {task.taken >= 2 ? "Taken" : "Available"}
                                 </p>
-                                
-                                {/* Use TakeTaskButton component */}
-                                <TakeTaskButton
-                                    taskId={task._id}
-                                    taskTaken={task.taken}
-                                    onTaskTaken={handleTaskTaken}
-                                />
                             </li>
                         ))}
                     </ul>

@@ -8,11 +8,11 @@ export const Appbar = () => {
                 TRIVERRR
             </div>
             <div className="flex items-center space-x-6">
-                <Link to="/signup">
+                <Link to="/newTaskPage">
                     <button
                         type="button"
                         className="text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold rounded-full text-sm px-5 py-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
-                        New Account
+                        New Task
                     </button>
                 </Link>
                 <Link to="/signin">
