@@ -1,7 +1,7 @@
 // src/components/AllUsers.tsx
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AddFriendButton } from "./AddFriendButton";
+import { AddFriendButton } from "../components/AddFriendButton";
 
 interface User {
     _id: string;

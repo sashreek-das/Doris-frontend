@@ -6,6 +6,8 @@ import { Signin } from './pages/Signin'
 import { Dashboard } from './pages/Dashboard'
 import { NewTaskPage } from './pages/NewTaskPage'
 import { YourTasks } from './pages/YourTasks'
+import { FriendsList } from './pages/MyFriends'
+import { AllUsers } from './pages/AllUsers'
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/newTaskPage' element={<NewTaskPage />} />
           <Route path='/yourTasks' element={<YourTasks />} />
+          <Route path='/myFriends' element={<FriendsList />} />
+          <Route path='/allUsers' element={<AllUsers />} />
         </Routes>
       </BrowserRouter>
     </div>
