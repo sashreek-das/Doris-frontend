@@ -8,7 +8,7 @@ interface Friend {
         _id: string;
         email: string;
         name?: string;
-    };
+    } | null; // Update to allow null or undefined for safety
 }
 
 export const FriendsList = () => {
@@ -55,31 +55,28 @@ export const FriendsList = () => {
                     ) : (
                         <ul className="space-y-6">
                             {friends.map((friend: Friend) => (
-                                <li
-                                    key={friend.userId._id}
-                                    className="flex items-center justify-between bg-gradient-to-r from-blue-100 via-white to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 p-4 rounded-2xl shadow-md transition-transform duration-300 hover:shadow-xl"
-                                >
-                                    <div className="flex items-center space-x-4">
-                                        <div className="w-12 h-12 rounded-full bg-indigo-200 dark:bg-gray-700 flex items-center justify-center">
-                                            <span className="text-xl text-indigo-600 dark:text-white font-bold">
-                                                {friend.userId.name?.[0].toUpperCase() || friend.userId.email[0].toUpperCase()}
-                                            </span>
+                                friend.userId && ( // Add this check to ensure userId is not null or undefined
+                                    <li
+                                        key={friend.userId._id}
+                                        className="flex items-center justify-between bg-gradient-to-r from-blue-100 via-white to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 p-4 rounded-2xl shadow-md transition-transform duration-300 hover:shadow-xl"
+                                    >
+                                        <div className="flex items-center space-x-4">
+                                            <div className="w-12 h-12 rounded-full bg-indigo-200 dark:bg-gray-700 flex items-center justify-center">
+                                                <span className="text-xl text-indigo-600 dark:text-white font-bold">
+                                                    {friend.userId.name?.[0].toUpperCase() || friend.userId.email[0].toUpperCase()}
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <p className="text-lg font-semibold text-gray-800 dark:text-white">
+                                                    {friend.userId.name || friend.userId.email}
+                                                </p>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                                    {friend.userId.email}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-lg font-semibold text-gray-800 dark:text-white">
-                                                {friend.userId.name || friend.userId.email}
-                                            </p>
-                                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                {friend.userId.email}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    {/* <Link to={`/friendProfile/${friend.userId._id}`}>
-                                        <button className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
-                                            View Profile
-                                        </button>
-                                    </Link> */}
-                                </li>
+                                    </li>
+                                )
                             ))}
                         </ul>
                     )}

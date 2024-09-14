@@ -19,7 +19,7 @@ export const AddFriendButton: React.FC<AddFriendButtonProps> = ({ friendId, onAd
         setErrorMessage("");
         try {
             await axios.post(
-                `https://doris-backend.vercel.app/api/v1/user/addFriend/${friendId}`,
+                `https://doris-backend.vercel.app/api/v1/user/sendFriendRequest/${friendId}`,
                 {},
                 {
                     headers: {
@@ -50,7 +50,7 @@ export const AddFriendButton: React.FC<AddFriendButtonProps> = ({ friendId, onAd
                 className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all"
                 disabled={loading}
             >
-                {loading ? "Adding..." : "Add Friend"}
+                {loading ? "Sending..." : "Send friend request"}
             </button>
         </div>
     );

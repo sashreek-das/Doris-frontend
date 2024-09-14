@@ -8,6 +8,7 @@ import { NewTaskPage } from './pages/NewTaskPage'
 import { YourTasks } from './pages/YourTasks'
 import { FriendsList } from './pages/MyFriends'
 import { AllUsers } from './pages/AllUsers'
+import { FriendRequests } from './pages/FriendRequests'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/yourTasks' element={<YourTasks />} />
           <Route path='/myFriends' element={<FriendsList />} />
           <Route path='/allUsers' element={<AllUsers />} />
+          <Route path='/friendRequests' element={<FriendRequests/>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -52,6 +52,13 @@ export const Appbar = () => {
                             >
                                 My Friends
                             </Link>
+                            <Link
+                                to="/friendRequests" // Add a route to the friend requests page
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                onClick={() => setDropdownOpen(false)}
+                            >
+                                Friend Requests
+                            </Link>
                             <button
                                 onClick={() => {
                                     localStorage.removeItem("token");
